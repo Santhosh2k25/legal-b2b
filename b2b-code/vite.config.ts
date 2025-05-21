@@ -3,22 +3,23 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 // https://vitejs.dev/config/
-export default ({ mode }: { mode: string }) => {
+export default defineConfig(({ mode }) => {
   // Load environment variables based on mode
   const env = loadEnv(mode, process.cwd(), '');
   const apiUrl = env.API_URL || 'http://localhost:3001';
 
-  return defineConfig({
+  return {
+    root: process.cwd(),
     plugins: [react()],
     optimizeDeps: {
       exclude: ['lucide-react'],
     },
     build: {
+      outDir: 'dist',
+      emptyOutDir: true,
       chunkSizeWarningLimit: 1500,
       rollupOptions: {
-        input: {
-          main: path.resolve(__dirname, 'index.html'),
-        },
+        input: path.resolve(process.cwd(), 'index.html'),
         output: {
           manualChunks: {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
@@ -46,5 +47,5 @@ export default ({ mode }: { mode: string }) => {
     preview: {
       port: 3000
     },
-  });
-};
+  };
+});
