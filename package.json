@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@types/axios": "^0.14.4",
+    "@types/mongoose": "^5.11.97",
+    "axios": "^1.8.4",
+    "mongoose": "^8.15.0",
+    "pdfjs-dist": "^3.11.174",
+    "react-pdf": "^9.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2"
+  }
+}

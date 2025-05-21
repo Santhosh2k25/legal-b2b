@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+
+    /* Bundler mode */
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "composite": true,
+    "outDir": "dist-server",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "server/**/*", 
+    "src/config/**/*",
+    "src/models/**/*", 
+    "src/services/**/*",
+    "src/lib/**/*"
+  ],
+  "exclude": ["node_modules", "src/pages/**/*", "src/components/**/*"]
+} 

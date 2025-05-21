@@ -1,0 +1,64 @@
+{
+  "common": {
+    "search": "தேடல்",
+    "notifications": "அறிவிப்புகள்",
+    "noNotifications": "புதிய அறிவிப்புகள் எதுவும் இல்லை",
+    "settings": "அமைப்புகள்",
+    "logout": "வெளியேறு",
+    "loading": "ஏற்றுகிறது...",
+    "error": "பிழை",
+    "success": "வெற்றி"
+  },
+  "nav": {
+    "dashboard": "டாஷ்போர்டு",
+    "cases": "வழக்குகள்",
+    "tasks": "பணிகள்",
+    "clients": "வாடிக்கையாளர்கள்",
+    "documents": "ஆவணங்கள்",
+    "calendar": "நாட்காட்டி",
+    "chat": "அரட்டை",
+    "aiAssistant": "AI உதவியாளர்",
+    "notifications": "அறிவிப்புகள்",
+    "digitalSignature": "டிஜிட்டல் கையொப்பம்",
+    "notary": "நோட்டரி"
+  },
+  "auth": {
+    "login": "உள்நுழைவு",
+    "register": "பதிவு",
+    "email": "மின்னஞ்சல்",
+    "password": "கடவுச்சொல்",
+    "confirmPassword": "கடவுச்சொல்லை உறுதிப்படுத்து",
+    "forgotPassword": "கடவுச்சொல் மறந்துவிட்டதா?",
+    "rememberMe": "என்னை நினைவில் கொள்",
+    "signIn": "உள்நுழை",
+    "createAccount": "கணக்கை உருவாக்கு",
+    "newToApp": "OCTOGENIE Legal இல் புதியவரா?"
+  },
+  "settings": {
+    "title": "அமைப்புகள்",
+    "subtitle": "உங்கள் கணக்கு விருப்பங்களை நிர்வகிக்கவும்",
+    "sections": {
+      "account": "கணக்கு",
+      "security": "பாதுகாப்பு",
+      "notifications": "அறிவிப்புகள்",
+      "language": "மொழி",
+      "appearance": "தோற்றம்",
+      "helpSupport": "உதவி & ஆதரவு",
+      "logout": "வெளியேறு"
+    },
+    "buttons": {
+      "edit": "திருத்து",
+      "save": "மாற்றங்களை சேமி",
+      "cancel": "ரத்து செய்",
+      "close": "மூடு"
+    },
+    "labels": {
+      "name": "பெயர்",
+      "email": "மின்னஞ்சல்",
+      "phone": "தொலைபேசி எண்",
+      "address": "முகவரி",
+      "theme": "தீம்",
+      "selectLanguage": "மொழியை தேர்ந்தெடுக்கவும்"
+    }
+  }
+}

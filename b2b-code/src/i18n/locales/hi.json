@@ -1,0 +1,36 @@
+{
+  "common": {
+    "search": "खोजें",
+    "notifications": "सूचनाएं",
+    "settings": "सेटिंग्स",
+    "logout": "लॉग आउट",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफल"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "cases": "केस",
+    "tasks": "कार्य",
+    "clients": "ग्राहक",
+    "documents": "दस्तावेज़",
+    "calendar": "कैलेंडर",
+    "chat": "चैट",
+    "aiAssistant": "एआई सहायक",
+    "notifications": "सूचनाएं",
+    "digitalSignature": "डिजिटल हस्ताक्षर",
+    "notary": "नोटरी"
+  },
+  "auth": {
+    "login": "लॉगिन",
+    "register": "रजिस्टर",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "rememberMe": "मुझे याद रखें",
+    "signIn": "साइन इन करें",
+    "createAccount": "खाता बनाएं",
+    "newToApp": "OCTOGENIE Legal में नए हैं?"
+  }
+}

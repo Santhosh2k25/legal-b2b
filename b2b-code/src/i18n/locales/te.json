@@ -1,0 +1,36 @@
+{
+  "common": {
+    "search": "వెతకండి",
+    "notifications": "నోటిఫికేషన్లు",
+    "settings": "సెట్టింగ్స్",
+    "logout": "లాగ్అవుట్",
+    "loading": "లోడ్ అవుతోంది...",
+    "error": "లోపం",
+    "success": "విజయం"
+  },
+  "nav": {
+    "dashboard": "డాష్బోర్డ్",
+    "cases": "కేసులు",
+    "tasks": "పనులు",
+    "clients": "క్లయింట్లు",
+    "documents": "పత్రాలు",
+    "calendar": "క్యాలెండర్",
+    "chat": "చాట్",
+    "aiAssistant": "AI సహాయకుడు",
+    "notifications": "నోటిఫికేషన్లు",
+    "digitalSignature": "డిజిటల్ సంతకం",
+    "notary": "నోటరీ"
+  },
+  "auth": {
+    "login": "లాగిన్",
+    "register": "రిజిస్టర్",
+    "email": "ఇమెయిల్",
+    "password": "పాస్వర్డ్",
+    "confirmPassword": "పాస్వర్డ్ నిర్ధారించండి",
+    "forgotPassword": "పాస్వర్డ్ మర్చిపోయారా?",
+    "rememberMe": "నన్ను గుర్తుంచుకో",
+    "signIn": "సైన్ ఇన్",
+    "createAccount": "ఖాతా సృష్టించండి",
+    "newToApp": "OCTOGENIE Legal కి కొత్తా?"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "common": {
+    "search": "Search",
+    "notifications": "Notifications",
+    "noNotifications": "No new notifications",
+    "settings": "Settings",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "cases": "Cases",
+    "tasks": "Tasks",
+    "clients": "Clients",
+    "documents": "Documents",
+    "calendar": "Calendar",
+    "chat": "Chat",
+    "aiAssistant": "AI Assistant",
+    "notifications": "Notifications",
+    "digitalSignature": "Digital Signature",
+    "notary": "Notary"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "signIn": "Sign In",
+    "createAccount": "Create Account",
+    "newToApp": "New to OCTOGENIE Legal?"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account preferences",
+    "sections": {
+      "account": "Account",
+      "security": "Security",
+      "notifications": "Notifications",
+      "language": "Language",
+      "appearance": "Appearance",
+      "helpSupport": "Help & Support",
+      "logout": "Logout"
+    },
+    "buttons": {
+      "edit": "Edit",
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "close": "Close"
+    },
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "address": "Address",
+      "theme": "Theme",
+      "selectLanguage": "Select Language"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "common": {
+    "search": "অনুসন্ধান",
+    "notifications": "বিজ্ঞপ্তি",
+    "settings": "সেটিংস",
+    "logout": "লগ আউট",
+    "loading": "লোড হচ্ছে...",
+    "error": "ত্রুটি",
+    "success": "সফল"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "cases": "মামলা",
+    "tasks": "কাজ",
+    "clients": "ক্লায়েন্ট",
+    "documents": "নথি",
+    "calendar": "ক্যালেন্ডার",
+    "chat": "চ্যাট",
+    "aiAssistant": "এআই সহকারী",
+    "notifications": "বিজ্ঞপ্তি",
+    "digitalSignature": "ডিজিটাল স্বাক্ষর",
+    "notary": "নোটারি"
+  },
+  "auth": {
+    "login": "লগইন",
+    "register": "নিবন্ধন",
+    "email": "ইমেইল",
+    "password": "পাসওয়ার্ড",
+    "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+    "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
+    "rememberMe": "আমাকে মনে রাখুন",
+    "signIn": "সাইন ইন করুন",
+    "createAccount": "অ্যাকাউন্ট তৈরি করুন",
+    "newToApp": "OCTOGENIE Legal এ নতুন?"
+  }
+}

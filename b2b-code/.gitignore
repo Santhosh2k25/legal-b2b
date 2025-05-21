@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+dist-server/
+
+# MongoDB memory server files
+.cache/mongodb-memory-server/
+node_modules/.cache/
+*.zip
+*.zip.downloading
+*.rar
+*.7z
+*.tar.gz
+
+# Environment variables
+.env
+.env.local

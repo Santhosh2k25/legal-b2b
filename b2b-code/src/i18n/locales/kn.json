@@ -1,0 +1,36 @@
+{
+  "common": {
+    "search": "ಹುಡುಕಿ",
+    "notifications": "ಅಧಿಸೂಚನೆಗಳು",
+    "settings": "ಸೆಟ್ಟಿಂಗ್ಗಳು",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+    "error": "ದೋಷ",
+    "success": "ಯಶಸ್ಸು"
+  },
+  "nav": {
+    "dashboard": "ಡ್ಯಾಶ್ಬೋರ್ಡ್",
+    "cases": "ಪ್ರಕರಣಗಳು",
+    "tasks": "ಕಾರ್ಯಗಳು",
+    "clients": "ಗ್ರಾಹಕರು",
+    "documents": "ದಾಖಲೆಗಳು",
+    "calendar": "ಕ್ಯಾಲೆಂಡರ್",
+    "chat": "ಚಾಟ್",
+    "aiAssistant": "AI ಸಹಾಯಕ",
+    "notifications": "ಅಧಿಸೂಚನೆಗಳು",
+    "digitalSignature": "ಡಿಜಿಟಲ್ ಸಹಿ",
+    "notary": "ನೋಟರಿ"
+  },
+  "auth": {
+    "login": "ಲಾಗಿನ್",
+    "register": "ನೋಂದಣಿ",
+    "email": "ಇಮೇಲ್",
+    "password": "ಪಾಸ್ವರ್ಡ್",
+    "confirmPassword": "ಪಾಸ್ವರ್ಡ್ ದೃಢೀಕರಿಸಿ",
+    "forgotPassword": "ಪಾಸ್ವರ್ಡ್ ಮರೆತಿರುವಿರಾ?",
+    "rememberMe": "ನನ್ನನ್ನು ನೆನಪಿಟ್ಟುಕೊಳ್ಳಿ",
+    "signIn": "ಸೈನ್ ಇನ್",
+    "createAccount": "ಖಾತೆ ರಚಿಸಿ",
+    "newToApp": "OCTOGENIE Legal ನಲ್ಲಿ ಹೊಸಬರೇ?"
+  }
+}
