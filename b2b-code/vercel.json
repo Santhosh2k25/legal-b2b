@@ -1,8 +1,9 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "framework": "vite",
+  "installCommand": "npm install",
   "functions": {
     "api/*.js": {
       "memory": 1024,
