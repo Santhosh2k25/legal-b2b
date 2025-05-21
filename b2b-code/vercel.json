@@ -1,9 +1,9 @@
 {
-  "buildCommand": "npm install && npm run build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
+  "buildCommand": "cd b2b-code && npm install && npm run build",
+  "outputDirectory": "b2b-code/dist",
+  "devCommand": "cd b2b-code && npm run dev",
   "framework": "vite",
-  "installCommand": "npm install",
+  "installCommand": "cd b2b-code && npm install",
   "functions": {
     "api/*.js": {
       "memory": 1024,
