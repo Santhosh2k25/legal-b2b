@@ -15,26 +15,10 @@ const isClient = typeof window !== 'undefined';
 
 // Helper function to construct correct API endpoints
 const getEndpointUrl = (path: string) => {
-  // Check if API_URL already includes '/api'
-  const hasApiPrefix = API_URL.endsWith('/api') || API_URL.includes('/api/');
-  
-  // If path already starts with 'api/'
-  if (path.startsWith('api/')) {
-    // If API_URL already has /api, remove it from path
-    if (hasApiPrefix) {
-      const trimmedPath = path.replace(/^api\//, '');
-      return `${API_URL}/${trimmedPath}`;
-    }
-    return `${API_URL}/${path}`;
-  }
-  
-  // Path doesn't start with api/
-  if (hasApiPrefix) {
-    return `${API_URL}/${path}`;
-  }
-  
-  // If neither has /api, add it
-  return `${API_URL}/api/${path}`;
+  // Remove any leading /api/ or api/ from the path
+  const cleanPath = path.replace(/^\/?api\//, '');
+  // Ensure we don't add duplicate /api/
+  return `${API_URL}/api/${cleanPath}`;
 };
 
 export interface AuthUser {

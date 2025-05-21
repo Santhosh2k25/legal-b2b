@@ -14,7 +14,7 @@ dotenv.config();
 let mongodbConnected = false;
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const JWT_EXPIRY = process.env.JWT_EXPIRY || '3d';
 
