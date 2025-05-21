@@ -1,19 +1,65 @@
 # Dependencies
 node_modules/
+*/node_modules/
 
 # Build files
 dist/
 dist-server/
+build/
+*.bundle.js
+*/dist/
+*/dist-server/
 
-# MongoDB memory server files
-.cache/mongodb-memory-server/
-node_modules/.cache/
+# Large assets
+*.mp4
+*.mov
+*.avi
+*.pdf
 *.zip
-*.zip.downloading
 *.rar
 *.7z
 *.tar.gz
+*.tgz
+*.iso
+*.dmg
+*.exe
+*.dll
+*.so
+*.jar
+
+# MongoDB memory server files
+.cache/
+.cache/mongodb-memory-server/
+node_modules/.cache/
+*.zip.downloading
+mongodb-*-*.zip
 
 # Environment variables
 .env
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel/ 
