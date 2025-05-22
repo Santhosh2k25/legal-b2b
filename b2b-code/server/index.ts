@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { connectDB } from '../src/lib/db';
 import * as mongodbService from '../src/services/mongodb';
-import jwt, { SignOptions } from 'jsonwebtoken';
+import jwt, { SignOptions, Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 // Direct import of the User model for registration debugging
 import User from '../src/models/User';
@@ -54,13 +54,15 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   
-  if (!token) {
-    return res.status(401).json({ error: 'Authentication required' });
+  if (!token || typeof token !== 'string') {
+    res.status(401).json({ error: 'Authentication required' });
+    return;
   }
   
-  jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
+  jwt.verify(token, JWT_SECRET || 'your-secret-key', (err: any, user: any) => {
     if (err) {
-      return res.status(403).json({ error: 'Invalid or expired token' });
+      res.status(403).json({ error: 'Invalid or expired token' });
+      return;
     }
     req.user = user;
     next();
@@ -116,7 +118,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
         email: !!req.body.email,
         password: !!req.body.password
       });
-      return res.status(400).json({ 
+      res.status(400).json({ 
         message: 'Email and password are required',
         details: 'Registration requires both email and password fields' 
       });
@@ -128,7 +130,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
         firstName: !!req.body.firstName,
         lastName: !!req.body.lastName
       });
-      return res.status(400).json({ 
+      res.status(400).json({ 
         message: 'First name and last name are required',
         details: 'User registration requires both first name and last name fields' 
       });
@@ -153,7 +155,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
     // Check if User model is available and properly initialized
     if (!User.modelName) {
       console.error('User model is not properly initialized!');
-      return res.status(500).json({ message: 'Database error - User model not available' });
+      res.status(500).json({ message: 'Database error - User model not available' });
     } else {
       console.log('User model is available:', User.modelName, User.collection.name);
     }
@@ -163,7 +165,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
     console.log('Existing user check:', existingUser ? 'User exists' : 'User does not exist');
     
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
+      res.status(400).json({ message: 'Email already in use' });
     }
     
     // Create new user
@@ -212,7 +214,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
     // Provide more detailed error messages
     if (error.name === 'ValidationError') {
       console.error('Mongoose validation error:', error.errors);
-      return res.status(400).json({ 
+      res.status(400).json({ 
         message: 'Validation error', 
         details: error.message 
       });
@@ -220,7 +222,7 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
     
     if (error.code === 11000) {
       // Duplicate key error
-      return res.status(409).json({ 
+      res.status(409).json({ 
         message: 'Email already in use',
         details: 'This email address is already registered' 
       });
@@ -233,6 +235,10 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
 app.post('/api/auth/login', async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
     
     // Find user by email
     const user = await mongodbService.getUserByEmail(email);
@@ -267,10 +273,11 @@ app.post('/api/auth/login', async (req: Request, res: Response) => {
       userType: user.userType || 'lawyer'
     };
     
-    res.json({ user: authUser, token });
-  } catch (error) {
+    console.log('Login successful for:', authUser.email);
+    res.status(200).json({ user: authUser, token });
+  } catch (error: any) {
     console.error('Login error:', error);
-    res.status(500).json({ message: 'Failed to login' });
+    res.status(500).json({ message: 'An error occurred during login', details: error.message });
   }
 });
 
@@ -280,19 +287,19 @@ app.post('/api/auth/verify', async (req: Request, res: Response) => {
     const { token } = req.body;
     
     if (!token) {
-      return res.status(400).json({ message: 'Token is required' });
+      res.status(400).json({ message: 'Token is required' });
     }
     
     // Verify the token
-    jwt.verify(token, JWT_SECRET, async (err: any, decoded: any) => {
+    jwt.verify(token, JWT_SECRET || 'your-secret-key', async (err: any, decoded: any) => {
       if (err) {
-        return res.status(401).json({ message: 'Invalid or expired token' });
+        res.status(401).json({ message: 'Invalid or expired token' });
       }
       
       // Check if user exists
       const user = await mongodbService.getUserById(decoded.id);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
       }
       
       // Format user response to match authService
@@ -318,7 +325,7 @@ app.get('/api/auth/profile', authenticateToken, async (req: Request, res: Respon
   try {
     const user = await mongodbService.getUserById(req.user.id);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'User not found' });
     }
     
     // Remove password from response
@@ -337,7 +344,7 @@ app.put('/api/auth/profile', authenticateToken, async (req: Request, res: Respon
     const user = await mongodbService.updateUser(req.user.id, updates);
     
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      res.status(404).json({ error: 'User not found' });
     }
     
     // Remove password from response
@@ -367,7 +374,7 @@ app.post('/api/cases', authenticateToken, async (req: Request, res: Response) =>
     // Check for required client field
     if (!req.body.client) {
       console.error('Missing required client field in request');
-      return res.status(400).json({ 
+      res.status(400).json({ 
         message: 'Client is required',
         details: 'Case creation requires a client field with a valid client ID' 
       });
@@ -502,7 +509,7 @@ app.post('/api/documents', authenticateToken, async (req: Request, res: Response
     
     // Check for validation errors
     if (error instanceof Error && error.name === 'ValidationError') {
-      return res.status(400).json({ 
+      res.status(400).json({ 
         error: 'Validation error', 
         details: errorMessage 
       });
@@ -553,7 +560,7 @@ app.post('/api/tasks', authenticateToken, async (req: Request, res: Response) =>
     // Verify required fields
     if (!req.body.title) {
       console.error('Missing required title field in task request');
-      return res.status(400).json({ 
+      res.status(400).json({ 
         message: 'Title is required',
         details: 'Task creation requires a title field' 
       });
@@ -577,7 +584,7 @@ app.post('/api/tasks', authenticateToken, async (req: Request, res: Response) =>
     
     // Check for validation errors
     if (error instanceof Error && error.name === 'ValidationError') {
-      return res.status(400).json({ 
+      res.status(400).json({ 
         error: 'Validation error', 
         details: errorMessage 
       });
@@ -614,25 +621,25 @@ app.post('/api/users/:userId/change-password', authenticateToken, async (req: Re
   try {
     // Ensure the user is modifying their own account
     if (req.user.id !== req.params.userId) {
-      return res.status(403).json({ message: 'You can only change your own password' });
+      res.status(403).json({ message: 'You can only change your own password' });
     }
     
     const { currentPassword, newPassword } = req.body;
     
     if (!currentPassword || !newPassword) {
-      return res.status(400).json({ message: 'Current password and new password are required' });
+      res.status(400).json({ message: 'Current password and new password are required' });
     }
     
     // Get the user
     const user = await mongodbService.getUserById(req.user.id);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: 'User not found' });
     }
     
     // Validate current password
     const isPasswordValid = await mongodbService.validatePassword(user, currentPassword);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Current password is incorrect' });
+      res.status(401).json({ message: 'Current password is incorrect' });
     }
     
     // Update password
@@ -649,19 +656,19 @@ app.post('/api/users/:userId/change-email', authenticateToken, async (req: Reque
   try {
     // Ensure the user is modifying their own account
     if (req.user.id !== req.params.userId) {
-      return res.status(403).json({ message: 'You can only change your own email' });
+      res.status(403).json({ message: 'You can only change your own email' });
     }
     
     const { email } = req.body;
     
     if (!email) {
-      return res.status(400).json({ message: 'Email is required' });
+      res.status(400).json({ message: 'Email is required' });
     }
     
     // Check if email is already in use
     const existingUser = await mongodbService.getUserByEmail(email);
     if (existingUser && existingUser.id !== req.user.id) {
-      return res.status(400).json({ message: 'Email already in use' });
+      res.status(400).json({ message: 'Email already in use' });
     }
     
     // Update email
@@ -689,7 +696,7 @@ app.put('/api/users/:userId/profile', authenticateToken, async (req: Request, re
   try {
     // Ensure the user is modifying their own account
     if (req.user.id !== req.params.userId) {
-      return res.status(403).json({ message: 'You can only update your own profile' });
+      res.status(403).json({ message: 'You can only update your own profile' });
     }
     
     // Update profile
@@ -718,7 +725,7 @@ app.post('/api/auth/reset-password', async (req: Request, res: Response) => {
     const { email } = req.body;
     
     if (!email) {
-      return res.status(400).json({ message: 'Email is required' });
+      res.status(400).json({ message: 'Email is required' });
     }
     
     // Check if user exists (but don't reveal this information)

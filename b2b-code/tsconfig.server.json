@@ -8,6 +8,8 @@
     "jsx": "react-jsx",
     "noImplicitThis": false,
     "noImplicitAny": false,
+    "allowJs": true,
+    "resolveJsonModule": true,
 
     /* Bundler mode */
     "isolatedModules": true,

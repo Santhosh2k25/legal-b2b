@@ -4,36 +4,12 @@ import { createRoot } from 'react-dom/client';
 import './i18n/config';
 import App from './App.tsx';
 import './index.css';
-import { connectDB, getMongoose } from './lib/db';
-import { initializeModels } from './models';
-
-// Initialize MongoDB connection
-const initDB = async () => {
-  try {
-    console.log('Initializing MongoDB connection...');
-    
-    // Connect to MongoDB
-    await connectDB();
-    
-    // Initialize all models
-    const models = initializeModels();
-    console.log('MongoDB models initialized:', Object.keys(models).join(', '));
-    
-    console.log('MongoDB initialized successfully');
-    return true;
-  } catch (error) {
-    console.error('Failed to initialize MongoDB:', error);
-    // Continue with app initialization even if MongoDB fails
-    return false;
-  }
-};
 
 // Start the app
-const startApp = async () => {
+const startApp = () => {
   try {
     console.log('Starting application...');
     
-    // Start the app first
     const rootElement = document.getElementById('root');
     if (!rootElement) {
       throw new Error('Root element not found');
@@ -46,14 +22,7 @@ const startApp = async () => {
       </StrictMode>
     );
     
-    // Then try to connect to MongoDB
-    const dbConnected = await initDB();
-    
-    if (!dbConnected) {
-      console.warn('⚠️ App started without MongoDB connection. Some features may not work.');
-    } else {
-      console.log('✅ App started successfully with MongoDB connection');
-    }
+    console.log('✅ App started successfully');
   } catch (error) {
     console.error('Failed to start app:', error);
     const rootElement = document.getElementById('root');
