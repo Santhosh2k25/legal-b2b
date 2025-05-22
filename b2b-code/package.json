@@ -15,6 +15,7 @@
     "start:dev": "concurrently \"npm run dev\" \"npm run dev:server\""
   },
   "dependencies": {
+    "@babel/runtime": "^7.27.1",
     "@headlessui/react": "^1.7.18",
     "@mistralai/mistralai": "^1.6.0",
     "@react-three/drei": "^9.122.0",

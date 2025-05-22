@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime';
+import '@babel/runtime/regenerator';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './i18n/config';

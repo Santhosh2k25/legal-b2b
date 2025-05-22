@@ -27,7 +27,7 @@ export default defineConfig({
     minify: 'terser',
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'regenerator-runtime'],
+    include: ['react', 'react-dom', '@babel/runtime/regenerator'],
     esbuildOptions: {
       target: 'esnext'
     }
