@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd b2b-code && npm run build",
+  "outputDirectory": "b2b-code/dist",
+  "framework": "vite"
+} 
