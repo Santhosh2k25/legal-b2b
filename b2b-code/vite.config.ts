@@ -25,11 +25,11 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     minify: 'terser',
-    rollupOptions: {
-      external: ['regenerator-runtime/runtime'],
-    }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'regenerator-runtime/runtime'],
+    include: ['react', 'react-dom', 'regenerator-runtime'],
+    esbuildOptions: {
+      target: 'esnext'
+    }
   },
 }) 
