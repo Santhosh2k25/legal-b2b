@@ -25,6 +25,14 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: true,
     minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          runtime: ['@babel/runtime/regenerator']
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom', '@babel/runtime/regenerator'],
