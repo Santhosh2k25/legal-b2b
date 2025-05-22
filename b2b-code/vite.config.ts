@@ -1,14 +1,35 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  root: path.resolve(__dirname),
   plugins: [react()],
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
   build: {
-    outDir: 'dist',
+    chunkSizeWarningLimit: 1500,
     rollupOptions: {
-      input: path.resolve(__dirname, 'index.html')
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'utils-vendor': ['date-fns', 'lucide-react'],
+        },
+      },
+    },
+  },
+  base: '/',
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5173',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
-  }
-}) 
+  },
+  preview: {
+    port: 5173
+  },
+});
