@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: './',
+  root: path.resolve(__dirname),
   plugins: [react()],
   resolve: {
     alias: {
@@ -27,9 +27,7 @@ export default defineConfig({
     sourcemap: true,
     minify: 'terser',
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
+      input: path.resolve(__dirname, 'index.html'),
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
