@@ -10,7 +10,7 @@ export const getClientEnv = () => {
     try {
       return {
         // @ts-ignore - We know this exists in Vite browser context
-        API_URL: (window as any).__VITE_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:3001/api',
+        API_URL: (window as any).__VITE_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:3001',
         // @ts-ignore - We know this exists in Vite browser context
         MONGODB_URI: (window as any).__VITE_MONGODB_URI || import.meta.env.VITE_MONGODB_URI,
       };
@@ -21,7 +21,7 @@ export const getClientEnv = () => {
   
   // Fallback values for Node.js environment
   return {
-    API_URL: process.env.VITE_API_URL || 'http://localhost:3001/api',
+    API_URL: process.env.VITE_API_URL || 'http://localhost:3001',
     MONGODB_URI: process.env.VITE_MONGODB_URI || 'mongodb://127.0.0.1:27017/legal-b2b',
   };
 }; 

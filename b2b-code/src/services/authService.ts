@@ -15,10 +15,11 @@ const isClient = typeof window !== 'undefined';
 
 // Helper function to construct correct API endpoints
 const getEndpointUrl = (path: string) => {
-  // Remove any leading slashes and 'api/' from the path
-  const cleanPath = path.replace(/^\/?(api\/)?/, '');
-  // Use the API_URL as is since it already includes /api
-  return `${API_URL}/${cleanPath}`;
+  // Remove any leading slashes from the path
+  const cleanPath = path.replace(/^\/+/, '');
+  // Add /api prefix if not already present
+  const apiPath = cleanPath.startsWith('api/') ? cleanPath : `api/${cleanPath}`;
+  return `${API_URL}/${apiPath}`;
 };
 
 export interface AuthUser {

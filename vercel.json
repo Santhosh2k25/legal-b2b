@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "b2b-code/dist-server/server/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "b2b-code/dist-server/server/index.js"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "b2b-code/dist-server/server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "b2b-code/dist-server/server/index.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+} 

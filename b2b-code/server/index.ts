@@ -2,21 +2,27 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { connectDB } from '../src/lib/db';
 import * as mongodbService from '../src/services/mongodb';
-import jwt, { SignOptions, Secret } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 // Direct import of the User model for registration debugging
 import User from '../src/models/User';
 
-// Load environment variables
-dotenv.config();
+// Only load environment variables in Node.js environment
+if (typeof process !== 'undefined' && process.versions && process.versions.node) {
+  dotenv.config();
+}
 
 // Set a global flag to track if MongoDB is already connected
 let mongodbConnected = false;
 
 const app = express();
 const port = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-const JWT_EXPIRY = process.env.JWT_EXPIRY || '3d';
+const JWT_SECRET = typeof process !== 'undefined' 
+  ? (process.env.JWT_SECRET || 'your-secret-key')
+  : 'your-secret-key';
+const JWT_EXPIRY = typeof process !== 'undefined'
+  ? (process.env.JWT_EXPIRY || '3d')
+  : '3d';
 
 // Extend Request type to include user
 declare global {
@@ -30,7 +36,9 @@ declare global {
 // Middleware
 // Configure CORS with specific options
 app.use(cors({
-  origin: '*', // Accept requests from any origin in development
+  origin: typeof process !== 'undefined' && process.env.NODE_ENV === 'production' 
+    ? ['https://legal-b2b.vercel.app', 'https://legal-b2b-cd16um64m-santhosh-palanisamys-projects.vercel.app']
+    : '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -55,18 +63,16 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   const token = authHeader && authHeader.split(' ')[1];
   
   if (!token || typeof token !== 'string') {
-    res.status(401).json({ error: 'Authentication required' });
-    return;
+    return res.status(401).json({ error: 'Authentication required' });
   }
   
-  jwt.verify(token, JWT_SECRET || 'your-secret-key', (err: any, user: any) => {
-    if (err) {
-      res.status(403).json({ error: 'Invalid or expired token' });
-      return;
-    }
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
     req.user = user;
     next();
-  });
+  } catch (err) {
+    return res.status(403).json({ error: 'Invalid or expired token' });
+  }
 };
 
 // Modified server startup with error handling
@@ -741,4 +747,7 @@ app.post('/api/auth/reset-password', async (req: Request, res: Response) => {
     console.error('Reset password error:', error);
     res.status(500).json({ message: 'Failed to process reset password request' });
   }
-}); 
+});
+
+// Export the Express API
+export default app; 
